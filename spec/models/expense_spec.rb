@@ -89,10 +89,12 @@ RSpec.describe Expense, type: :model do
           expect(@expense_1.errors.messages).to be_empty
         end
       end
+
+
+
+
+
     end
   end
 end
-
-
-
 
