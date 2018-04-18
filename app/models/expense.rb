@@ -1,16 +1,28 @@
 class Expense < ApplicationRecord
   belongs_to :user
   belongs_to :category
-  belongs_to :transaction_type
+  belongs_to :transaction_type  
 
-  validates :user, presence: true
-  validates :category, presence: true
+  validates :user_id, presence: true
   validates :amount, numericality: { greater_than: 0 }
   validates :concept, presence: true
   validate :date_cant_be_nil
 
-  def data_cant_be_nil
-    Stashed changes
+  scope :for_category, -> (category) { 
+    joins(:category).where'categories.name = ?', category}
+
+  scope :for_amount, -> (amount){ where('expenses.amount = ?', amount)} 
+
+  scope :last_six_months, -> { where('date >= ?', 6.months.ago)}
+  scope :this_month, -> {where('date > ? and date < ? ', Time.now.beginning_of_month, Time.now.end_of_month )}
+  scope :last_month, -> {where('date > ?', 1.months.ago)} 
+  
+  scope :amount_last_month, -> {last_month.pluck(:amount).sum }
+  scope :amount_this_month, -> {this_month.pluck(:amount).sum }
+
+  scope :daily_expenses, -> {where('date >=?', 1.day.ago).count )} 
+
+  def date_cant_be_nil
     if self.date.nil?
       self.date = Time.now
     end
