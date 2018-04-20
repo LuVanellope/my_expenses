@@ -6,7 +6,7 @@ class Expense < ApplicationRecord
   validates :user_id, presence: true
   validates :amount, numericality: { greater_than: 0 }
   validates :concept, presence: true
-  validate :date_cant_be_nil
+  before_create :date_cant_be_nil
 
   scope :for_category, -> (category) { 
     joins(:category).where'categories.name = ?', category}
@@ -20,7 +20,7 @@ class Expense < ApplicationRecord
   scope :amount_last_month, -> {last_month.pluck(:amount).sum }
   scope :amount_this_month, -> {this_month.pluck(:amount).sum }
 
-  scope :daily_expenses, -> {where('date >=?', 1.day.ago).count )} 
+  scope :daily_expenses, -> {where('date >=?', 1.day.ago).count} 
 
   def date_cant_be_nil
     if self.date.nil?
