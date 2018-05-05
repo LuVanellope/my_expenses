@@ -1,6 +1,9 @@
 Rails.application.routes.draw do
-  get 'dashboard/index'
+  get 'expenses/index'
 
+  root "dashboard#index"
+  resources :dashboard, only:[:index]
+  resources :expenses, only:[:index]
   devise_for :users
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 end

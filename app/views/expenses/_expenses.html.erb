@@ -1,0 +1,13 @@
+<tbody>
+   <% fernanda.each do |expense|%>
+     <tr>
+       <td><%=expense.date.strftime(" %d %b")%></td>
+       <td>
+        <p class ="transactiontable"> <%=expense.transaction_type.name %></p>  
+        <%=expense.concept %></td>
+       <td><%=expense.category.name %></td>
+       <td><%=expense.amount.to_i %></td>
+       <td></td>
+     </tr>
+  <%end%>
+</tbody>

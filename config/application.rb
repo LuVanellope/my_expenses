@@ -9,6 +9,8 @@ Bundler.require(*Rails.groups)
 module MyExpenses
   class Application < Rails::Application
     # Initialize configuration defaults for originally generated Rails version.
+    config.autoload_paths += Dir["#{config.root}/lib/**/"]
+    config.autoload_paths += Dir["#{config.root}/vendor/lib/**/"] 
     config.load_defaults 5.1
     config.autoload_paths += Dir["#{config.root}/lib/**/"] 
     # Settings in config/environments/* take precedence over those specified here.

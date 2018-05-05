@@ -1,0 +1,78 @@
+<DOCTYPE html>
+<htm>
+<head>
+  <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1"> 
+
+    <!-- Bootstrap -->
+     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+
+     <!-- jQuery library -->
+     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+
+     <!-- Latest compiled JavaScript -->
+     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+     <title>Expenses</title>
+</head>
+<body>
+  <div class "row">   
+    <div class= "col-sm-4">
+      <h1>TransactionType</h1>
+      </div> 
+        <div class = "col-sm-8">
+          <h1>Expenses</h1>
+             
+          <nav class="navbar navbar-default">
+            <div class="container-fluid">
+              <section>
+                 <p class= "col-sm-4"><%=@amount  %></p> 
+                 <span class= "col-sm-4" >Total</span>
+  
+                 <p class= "col-sm-4" >$ 13'234.234</p> 
+                 <span >Today</span>
+  
+                 <p class= "col-sm-4" >$ 13'234.234</p> 
+                 <span>Today</span>
+              </section>
+            </div>
+          </nav> 
+        <div class="table-responsive">          
+          <table class="table">
+           <thead>
+             <tr>
+               <th>Date</th>
+               <th>Concept</th>
+               <th>Category</th>
+               <th>Value</th>
+             </tr>
+           </thead>
+	   <%= render partial: "expenses", locals:{ fernanda: @expenses }%>
+       </table> 
+     </div> 
+     <script>
+       $(document).ready(funtion(){
+        $(".transaction-type").on('click', funtion(e){
+          var filter = this.id; //Html tag with the id info
+	  var param = {"transaction_type":filter }; //JSON that will be send 
+	  e.preventDefault(); //stop de page reload
+	  $.ajax({
+	    type: 'GET', // Http method
+	    url: '/expenses.js', // Url to method
+	    dataType: 'html', // Type object that the request will return
+	    data: param, //Data that will be sended within the request
+	    success: function (response){ //Handle response from controller
+	      $("#expenses").empty();
+	      $("#expenses").html(response);
+	    }
+	  });
+	});
+      });
+     </script>
+</div>
+     
+   
+  
+</body>
+</html>
+
