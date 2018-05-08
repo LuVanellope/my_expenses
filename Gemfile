@@ -6,9 +6,9 @@ git_source(:github) do |repo_name|
 end
 
 
-
+gem 'jquery-rails'
 gem 'rspec-rails'
-
+gem 'bootstrap', '~> 4.1.1'					
 gem 'devise'
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'

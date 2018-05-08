@@ -1,78 +1,80 @@
-<DOCTYPE html>
-<htm>
-<head>
-  <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1"> 
+<%= render "layouts/menu" %>
+<div class="row">   
+  <div class="col-sm-3">
+    <h1>Transaction Type</h1>
+    <h4>Select transaction type</h4>
+    <ul class="list-group">
+    <%@transaction_types.each do |transaction_type|%>
+      <li class="list-group-item">
+        <a class="transaction-type" id=<%=transaction_type.name%>><%=transaction_type.name%></a></li>
+    <%end%>
+    </ul>
+    <h1>Category</h1>
+    <h4>Seclect category</h4>
+    <ul class="list-group">
+      <%@categories.each do |category|%>
+        <li class="list-group-item">
+          <a class="category" id=<%=category.name%>><%=category.name%></a>
+	</li>
+      <%end%>
+    </ul>
 
-    <!-- Bootstrap -->
-     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-
-     <!-- jQuery library -->
-     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-
-     <!-- Latest compiled JavaScript -->
-     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-
-     <title>Expenses</title>
-</head>
-<body>
-  <div class "row">   
-    <div class= "col-sm-4">
-      <h1>TransactionType</h1>
-      </div> 
-        <div class = "col-sm-8">
-          <h1>Expenses</h1>
-             
-          <nav class="navbar navbar-default">
-            <div class="container-fluid">
-              <section>
-                 <p class= "col-sm-4"><%=@amount  %></p> 
-                 <span class= "col-sm-4" >Total</span>
-  
-                 <p class= "col-sm-4" >$ 13'234.234</p> 
-                 <span >Today</span>
-  
-                 <p class= "col-sm-4" >$ 13'234.234</p> 
-                 <span>Today</span>
-              </section>
-            </div>
-          </nav> 
-        <div class="table-responsive">          
-          <table class="table">
-           <thead>
-             <tr>
-               <th>Date</th>
-               <th>Concept</th>
-               <th>Category</th>
-               <th>Value</th>
-             </tr>
-           </thead>
-	   <%= render partial: "expenses", locals:{ fernanda: @expenses }%>
-       </table> 
-     </div> 
-     <script>
-       $(document).ready(funtion(){
-        $(".transaction-type").on('click', funtion(e){
+  </div>
+  <div class="col-sm-9">
+    <h1>Expenses</h1>
+      <section class="row">
+        <div class="  col-4">
+          <p><%=@amount%></p> 
+          <span>Total</span>
+	</div>
+	<div class="col-4">
+          <p><%=@transactions %></p> 
+          <span>Transactions</span>
+        </div> 
+	<div class="col-4">
+          <p>$13'234.234</p> 
+          <span>Today</span>
+	</div>
+      </section>
+    <div class="expenses">          
+      <%= render partial: "expenses", locals:{ expenses: @expenses }%>
+    </div> 
+    <script>
+      $(document).ready(function(){
+        $(".transaction-type").on('click', function(e){
           var filter = this.id; //Html tag with the id info
-	  var param = {"transaction_type":filter }; //JSON that will be send 
-	  e.preventDefault(); //stop de page reload
+          var param = {"transaction_type": filter }; //JSON that will be send 
+          e.preventDefault(); //stop de page reload
+          $.ajax({
+            type: 'GET', // Http method
+            url: '/expenses.js', // Url to method
+            dataType: 'html', // Type object that the request will return
+            data: param, //Data that will be sended within the request
+            success: function (response){ //Handle response from controller
+              $(".expenses").empty();
+              $(".expenses").html(response);
+            }
+          });
+        });
+      });
+    
+      $(".category").on('click', function(e){
+        var filter = this.id;
+        var param = {"category":filter};
+	  e.preventDefault();
 	  $.ajax({
-	    type: 'GET', // Http method
-	    url: '/expenses.js', // Url to method
-	    dataType: 'html', // Type object that the request will return
-	    data: param, //Data that will be sended within the request
-	    success: function (response){ //Handle response from controller
-	      $("#expenses").empty();
-	      $("#expenses").html(response);
+	    type:'GET',
+	    url:'expense.js',
+	    data:param,
+	    success: function(response){
+	      $(".expenses").empty();
+	      $(".expenses").html(response);
 	    }
 	  });
-	});
       });
-     </script>
-</div>
-     
-   
-  
-</body>
-</html>
+    </script>
+    
 
+  </div>
+ </div>
+</div> 

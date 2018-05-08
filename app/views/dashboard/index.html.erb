@@ -1,55 +1,28 @@
-<!DOCTYPE html>
-<html>
-<head>
-<title>My Expenses</title>
-</head>
-<body>
-
-<!--
-<ul class = "nav navbar" >
-  <li>'Expensify'</li>
-  <li><a href='#dashboard'>Dashboard</a></li>
-<li><a href='/expenses'>Expenses</a></li>
-</ul>
--->
-
-
-<nav class="navbar navbar-default">
-  <div class="container-fluid">
-    <div class="navbar-header">
-      <a class="navbar-brand" href="#">'Expensify'</a>
+<%= render "layouts/menu" %>
+<div class="container bg-dark">
+  <section class="d-flex justify-content-around">
+    <div id="stats" class="p-2">
+      <p>$1.300.000</p>
+      <span>Today</span>
     </div>
-    <ul class="nav navbar-nav">
-      <li><a href="/dashboard">Dashboard</a></li>
-      <li><a href="/expenses">Expenses</a></li>
-    </ul>
-  </div>
-</nav>
-
-
-<br>
-
-<div>
-  <section>
-    <p>$ 13'234.234</p> 
-    <span>Today</span>
-
-    <p>$ 13'234.234</p> 
-    <span>Today</span>
-
-    <p>$ 13'234.234</p> 
-    <span>Today</span>
-
+    <div id="stats" class="p-2">
+      <p>$1.300.000</p>
+      <span>Today</span>
+    </div>
+    <div id="stats" class="p-2">
+      <p>$1.300.000</p>
+      <span>Today</span>
+    </div>
+    <div id="stats" class="p-2">
+      <p>$1.300.000</p>
+      <span>Today</span>
+    </div>
   </section>
 
-  <section>
-    <div> <img src="http://www.scielo.sa.cr/img/revistas/mlcr/v29n1/art4i4.jpg" alt="Smiley face" height="420" width="420">    </div>
-    <div></div>
-    <div></div>
-    <div></div>
+  <section class="d-flex justify-content-around flex-wrap">
+    <div class="graphs"><img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR8gqjX65bDhKIlCyhPQGEZlcIVZmGQVyYr0BF49GUV8A3f00Qm" alt=""></div>
+    <div class="graphs"><img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR8gqjX65bDhKIlCyhPQGEZlcIVZmGQVyYr0BF49GUV8A3f00Qm" alt=""></div>
+    <div class="graphs"><img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR8gqjX65bDhKIlCyhPQGEZlcIVZmGQVyYr0BF49GUV8A3f00Qm" alt=""></div>
+    <div class="graphs"><img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR8gqjX65bDhKIlCyhPQGEZlcIVZmGQVyYr0BF49GUV8A3f00Qm" alt=""></div>
   </section>
 </div>
-
-
-</body>
-</html>

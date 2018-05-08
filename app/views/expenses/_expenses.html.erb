@@ -1,13 +1,22 @@
-<tbody>
-   <% fernanda.each do |expense|%>
-     <tr>
-       <td><%=expense.date.strftime(" %d %b")%></td>
-       <td>
+<table class="table">
+  <thead class="thead-dark">
+    <tr>
+      <th>Date</th>
+      <th>Concept</th>
+      <th>Category</th>
+      <th>Value</th>
+    </tr>
+  </thead>
+  <% expenses.each do |expense|%>
+  <tbody>
+    <tr>
+      <td><%=expense.date.strftime(" %d %b")%></td>
+      <td>
         <p class ="transactiontable"> <%=expense.transaction_type.name %></p>  
         <%=expense.concept %></td>
-       <td><%=expense.category.name %></td>
-       <td><%=expense.amount.to_i %></td>
-       <td></td>
-     </tr>
+      <td><%=expense.category.name %></td>
+      <td>$<%=expense.amount.to_i %></td>
+    </tr>
+  </tbody>
   <%end%>
-</tbody>
+<table>
