@@ -6,10 +6,6 @@ class DashboardHandler
     @expenses = expenses
   end
 
-  def today_expenses
-    @expenses.daily_expenses.pluck(:amount).sum
-  end
-
   def yesterday_expenses
     @expenses.yesterday_expenses.pluck(:amount).sum
   end
@@ -25,15 +21,19 @@ class DashboardHandler
   #Graficmethods  
 
   def last_six_months_expenses
+    @expenses.last_six_months_expenses
   end
 
   def by_day_expenses
+    @expenses.daily_expenses.sum(:amount)
   end
 
   def by_category_expenses
+    @expenses.for_category
   end
 
   def accumulated_last_vs_current_month 
+    
   end
 
 end
